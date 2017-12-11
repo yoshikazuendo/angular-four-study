@@ -1,2 +1,8 @@
 <h1>{{title}}</h1>
-<my-heroines></my-heroines>
+<!-- <a>要素でRouterLinkディレクティブにパスを与え、RouterOutletディレクティブを使うと、リンクしたパスのコンポーネントが差し込まれる。 -->
+<nav>
+        <a routerLink="/dashboard">ダッシュボード</a>
+        <a routerLink="/heroines">ヒロインたち</a>
+</nav>
+<router-outlet></router-outlet>
+<!-- <my-heroines></my-heroines> -->
