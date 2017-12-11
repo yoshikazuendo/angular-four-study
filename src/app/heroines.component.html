@@ -1,0 +1,17 @@
+<h2>ヒロインたち</h2>
+<ul class="heroines">
+    <!-- ■*ngForディレクティブ-->
+    <!-- 　heroinesからlet宣言したheroineへ取り出し、ネスト内のテンプレートに従って要素を差し込む。-->
+    <!-- 　「*」は、<li>のノード以降が複数データのテンプレであることを示す。-->
+    <!-- ■(click)はEvent binding。イベント毎の処理をcomponentに書ける。-->
+    <!-- ■[class.selected]はClass binding。要素のクラスを動的に与えたり除いたりする-->
+    <!-- 　trueと評価される式を与えるとそのクラスが加わり、falseであれば除かれる。-->
+    <!-- 　heroineオブジェクトが、選択された項目(selectedHeroine)かどうかを判定している。-->
+    <li *ngFor="let heroine of heroines"
+        [class.selected]="heroine === selectedHeroine"
+        (click)="onSelect(heroine)">
+        <span class="badge">{{heroine.id}}</span> {{heroine.name}}
+    </li>
+</ul>
+<!-- 親コンポーネントから子コンポーネントに渡す場合は、[heroine]とかっこでくくる。→子コンポーネントにあるプロパティ-->
+<heroine-detail [heroine]="selectedHeroine"></heroine-detail>

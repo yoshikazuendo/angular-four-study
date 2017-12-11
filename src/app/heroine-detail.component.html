@@ -1,0 +1,11 @@
+<!-- *ngIfディレクティブ-->
+<!-- heroineがfalseと評価されれば、その要素は処理されない。-->
+<!-- 「*」は、<div>のノード以降が複数データのテンプレであることを示す。-->
+<div *ngIf="heroine">
+    <h2>{{heroine.name}}の情報</h2>
+    <div><label>番号: </label>{{heroine.id}}</div>
+    <div>
+        <label>名前: </label>
+        <input [(ngModel)]="heroine.name" placeholder="名前">
+    </div>
+</div>
