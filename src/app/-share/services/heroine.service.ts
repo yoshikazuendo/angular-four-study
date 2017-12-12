@@ -13,4 +13,9 @@ export class HeroineService {
         // HTTPから取得するなら非同期が必須。
         return Promise.resolve(HEROINES);
     }
+    getHeroine(id: number): Promise<Heroine> {
+        return this.getHeroines()
+        .then((heroines: Heroine[]) => heroines
+        .find((heroine: Heroine) => heroine.id === id));
+    }
 }

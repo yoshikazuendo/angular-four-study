@@ -13,5 +13,9 @@
         <span class="badge">{{heroine.id}}</span> {{heroine.name}}
     </li>
 </ul>
+<div *ngIf="selectedHeroine">
+    <h2>ヒロイン「{{selectedHeroine.name}}」</h2>
+    <button (click)="gotoDetail()">詳細を見る</button>
+</div>
 <!-- 親コンポーネントから子コンポーネントに渡す場合は、[heroine]とかっこでくくる。→子コンポーネントにあるプロパティ-->
-<heroine-detail [heroine]="selectedHeroine"></heroine-detail>
+<!-- <heroine-detail [heroine]="selectedHeroine"></heroine-detail> -->
