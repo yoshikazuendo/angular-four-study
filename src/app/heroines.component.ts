@@ -20,7 +20,7 @@ import { HeroineService } from './-share/services/heroine.service';
   // templateパラメーターで指定するurlは、アプリケーションルートからのパスを指定する
   templateUrl: 'heroines.component.html',
   // providesプロパティ：指定されたサービスのインスタンスを、コンストラクタで受け取れるようになる。
-  providers: [ HeroineService ],
+  providers: [HeroineService],
   // cssをコンポーネント別に設定できる。他のコンポーネントには影響されなくなる。
   styleUrls: ['./heroines.component.scss']
 })
@@ -29,8 +29,8 @@ import { HeroineService } from './-share/services/heroine.service';
 // exportキーワードは「外部に公開する」という意味
 export class HeroinesComponent implements OnInit {
   title = 'サンプルアプリ';
-  heroines: Heroine[];  
-  selectedHeroine : Heroine;
+  heroines: Heroine[];
+  selectedHeroine: Heroine;
 
   // Componentデコレーター.providersプロパティに指定されたサービスを受け取れるようになる。
   constructor(
@@ -40,16 +40,16 @@ export class HeroinesComponent implements OnInit {
 
   // OnInitクラスのngOnInit()メソッド：データバインディング後に一度だけ呼び出される。
   ngOnInit(): void {
-	this.getHeroines();
+    this.getHeroines();
   }
   // サービスを呼び出すメソッドを作る。
   getHeroines(): void {
-	// こっちは同期処理
-	//   this.heroines = this.heroineService.getHeroines();
-	// こっちは非同期処理。
-	// Service側のPromiseオブジェクトが解放されると、Promise.thenメソッドが実行されるので、第一引数にコールバック処理を書く。
-	this.heroineService.getHeroines().then((heroines: Heroine[]) =>
-		this.heroines = heroines);
+    // こっちは同期処理
+    //   this.heroines = this.heroineService.getHeroines();
+    // こっちは非同期処理。
+    // Service側のPromiseオブジェクトが解放されると、Promise.thenメソッドが実行されるので、第一引数にコールバック処理を書く。
+    this.heroineService.getHeroines().then((heroines: Heroine[]) =>
+      this.heroines = heroines);
   }
 
   onSelect(heroine: Heroine): void {
@@ -59,6 +59,31 @@ export class HeroinesComponent implements OnInit {
 
   gotoDetail(): void {
     this.router.navigate(['/detail', this.selectedHeroine.id]);
+  }
+
+  add(name: string): void {
+    name = name.trim();
+    // 値があるかどうか？
+    if (!name) { return; }
+    this.heroineService.create(name)
+      .then((heroine: Heroine) => {
+        // 一覧に追加する。
+        this.heroines.push(heroine);
+        // 選択状態をクリア
+        this.selectedHeroine = null;
+      });
+  }
+
+  delete(heroine: Heroine): void {
+    this.heroineService.delete(heroine.id)
+      .then(() => {
+        // 一覧からも、Array.filter()メソッドで、削除するヒロイン以外をセットするようにしている。
+        this.heroines = this.heroines.filter((_heroine: Heroine) => _heroine !== heroine);
+        if (this.selectedHeroine === heroine) {
+          // 選択状態をクリア
+          this.selectedHeroine = null;
+        }
+      });
   }
 }
 

@@ -60,6 +60,23 @@ export class HeroineService {
             .catch(this.handleError);
     }
 
+    create(name: string): Promise<Heroine> {
+        // nameをJSON文字列に変換して、postメソッドにリクエストとして渡す。
+        return this.http.post(this.heroinesUrl, JSON.stringify({ name: name }), { headers: this.headers })
+            .toPromise()
+            .then((response: Response) => response.json())
+            .catch(this.handleError);
+    }
+
+    delete(id: number): Promise<void> {
+        const url = `${this.heroinesUrl}/${id}`;
+        // deleteメソッドにidを渡す。これで、HTTPサービスによりリモートのデータが削除される。
+        return this.http.delete(url, { headers: this.headers })
+            .toPromise()
+            .then(() => null)
+            .catch(this.handleError);
+    }
+
     private handleError(error: any): Promise<any> {
         console.error('An error occured', error);
         return Promise.reject(error.message || error);

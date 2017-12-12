@@ -1,4 +1,10 @@
 <h2>ヒロインたち</h2>
+<div>
+    <!-- #で、テンプレート参照変数を与える。 -->
+    <label>ヒロイン名：</label><input #heroineName />
+    <!-- addには、#heroineNameのテキストの値（valueプロパティ）を渡す。 -->
+    <button (click)="add(heroineName.value); heroineName.Value=''">追加</button>
+</div>
 <ul class="heroines">
     <!-- ■*ngForディレクティブ-->
     <!-- 　heroinesからlet宣言したheroineへ取り出し、ネスト内のテンプレートに従って要素を差し込む。-->
@@ -11,6 +17,8 @@
         [class.selected]="heroine === selectedHeroine"
         (click)="onSelect(heroine)">
         <span class="badge">{{heroine.id}}</span> {{heroine.name}}
+        <!-- Event.stopPropagationメソッドを呼び出して、親の<li>要素にクリックイベントが伝わらないようにする。 -->
+        <button class="delete" (click)="delete(heroine); $event.stopPropagation()">x</button>
     </li>
 </ul>
 <div *ngIf="selectedHeroine">
