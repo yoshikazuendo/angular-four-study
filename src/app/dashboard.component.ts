@@ -3,7 +3,8 @@ import { Heroine } from './-share/services/heroine';
 import { HeroineService } from './-share/services/heroine.service';
 @Component({
     selector: 'my-dashboard',
-    templateUrl: './dashboard.component.html'
+    templateUrl: './dashboard.component.html',
+    styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
     heroines: Heroine[] = [];

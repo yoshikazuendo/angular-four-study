@@ -1,6 +1,6 @@
 // RxJSのswitchMapオペレーターをインポート（パラメーターの受取で使用？）
 import 'rxjs/add/operator/switchMap';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, /*Input,*/ OnInit } from '@angular/core';
 // ダッシュボードに戻る機能を加えるためのモジュールを呼び出す（ActivatedRoute, Params, Location）
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
@@ -10,12 +10,13 @@ import { HeroineService } from './-share/services/heroine.service';
 
 @Component({
     selector: 'heroine-detail',
-    templateUrl: 'heroine-detail.component.html'
+    templateUrl: 'heroine-detail.component.html',
+    styleUrls: ['./heroine-detail.component.scss']
 })
 
 // @Inputデコレーターを付与することで、他コンポーネントから受け取れる（binding）ようになる。
 export class HeroineDetailComponent implements OnInit {
-    @Input()
+    // @Input()
     heroine: Heroine;
     constructor(
         private route: ActivatedRoute,

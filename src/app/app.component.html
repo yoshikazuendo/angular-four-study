@@ -1,8 +1,10 @@
 <h1>{{title}}</h1>
 <!-- <a>要素でRouterLinkディレクティブにパスを与え、RouterOutletディレクティブを使うと、リンクしたパスのコンポーネントが差し込まれる。 -->
+<!-- このとき、<nav>要素で囲う -->
 <nav>
-        <a routerLink="/dashboard">ダッシュボード</a>
-        <a routerLink="/heroines">ヒロインたち</a>
+        <!-- routerLinkActiveディレクティブにcssのactiveを指定。アクティブの場合、cssが有効になる。 -->
+        <a routerLink="/dashboard" routerLinkActive="active">ダッシュボード</a>
+        <a routerLink="/heroines" routerLinkActive="active">ヒロインたち</a>
 </nav>
 <router-outlet></router-outlet>
 <!-- <my-heroines></my-heroines> -->

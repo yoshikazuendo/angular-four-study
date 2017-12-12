@@ -1,5 +1,6 @@
 // コンポーネントで利用しているモジュールをインポート
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Heroine } from './-share/services/heroine';
 import { HeroineService } from './-share/services/heroine.service';
 import { HEROINES } from './-share/services/mock-heroines';
@@ -32,7 +33,10 @@ export class HeroinesComponent implements OnInit {
   selectedHeroine : Heroine;
 
   // Componentデコレーター.providersプロパティに指定されたサービスを受け取れるようになる。
-  constructor(private heroineService: HeroineService) { }
+  constructor(
+    private router: Router,
+    private heroineService: HeroineService
+  ) { }
 
   // OnInitクラスのngOnInit()メソッド：データバインディング後に一度だけ呼び出される。
   ngOnInit(): void {
@@ -51,10 +55,10 @@ export class HeroinesComponent implements OnInit {
   onSelect(heroine: Heroine): void {
     this.selectedHeroine = heroine;
     console.log(this.selectedHeroine); // 確認用
+  }
 
-    var ret = "endo,aiwa";
-    var value = ret.split(',');
-    
+  gotoDetail(): void {
+    this.router.navigate(['/detail', this.selectedHeroine.id]);
   }
 }
 
