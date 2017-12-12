@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Heroine } from './-share/services/heroine';
 import { HeroineService } from './-share/services/heroine.service';
-import { HEROINES } from './-share/services/mock-heroines';
+// import { HEROINES } from './-share/services/mock-heroines';
 
 // コンポーネントに関する情報を宣言（デコレータ関数）
 // デコレータ関数は、渡された引数に基いて、そのあとに宣言されたクラス（AppComponent）を実行時に処理する。

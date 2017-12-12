@@ -22,18 +22,23 @@ export class HeroineDetailComponent implements OnInit {
         private route: ActivatedRoute,
         private location: Location,
         private heroineService: HeroineService
-    ) {}
+    ) { }
     ngOnInit(): void {
         // ActibatedRoute.paramsプロパティから、switchMapオペレーターで関数を呼び、
         // 関数の引数（params）からidプロパティが取得できる。
         // （引数に+演算子を加えたのは数値に変換するため）
-         this.route.params
-         .switchMap((params: Params) => this.heroineService.getHeroine(+params['id']))
-         .subscribe((heroine: Heroine) => this.heroine = heroine);
+        this.route.params
+            .switchMap((params: Params) => this.heroineService.getHeroine(+params['id']))
+            .subscribe((heroine: Heroine) => this.heroine = heroine);
     }
 
     goBack(): void {
         // ブラウザの履歴に従ってURLを戻る。
         this.location.back();
+    }
+
+    save(): void {
+        this.heroineService.update(this.heroine)
+            .then(() => this.goBack());
     }
 }
